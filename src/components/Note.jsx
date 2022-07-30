@@ -5,7 +5,7 @@ function Note() {
 	const noteContent = "Content...";
 
 	return (
-		<div>
+		<div className="note">
 			<h1>{noteTitle}</h1>
 			<p>{noteContent}</p>
 		</div>
