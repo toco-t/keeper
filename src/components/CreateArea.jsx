@@ -33,7 +33,7 @@ function CreateArea(props) {
 				/>
 				<button
 					onClick={() => {
-						props.addTask(todo);
+						props.add(todo);
 						setTodo({ title: "", content: "" });
 						document.querySelector("textarea").value = "";
 					}}

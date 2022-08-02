@@ -3,22 +3,31 @@ import Header from "./Header";
 import CreateArea from "./CreateArea";
 import Note from "./Note";
 import Footer from "./Footer";
+import { v4 as uuid } from "uuid";
 
 function App() {
 	const [notes, setNotes] = useState([]);
 
 	function addTask(note) {
 		setNotes((prevNotes) => {
-			prevNotes.push(note);
+			return [...prevNotes, note];
 		});
-		console.log(note, notes);
 	}
 
 	return (
 		<div>
 			<Header />
-			<CreateArea addTask={addTask} />
-			<Note key={1} title="Note title" content="Note content" />
+			<CreateArea add={addTask} />
+			{notes.map((note, index) => {
+				return (
+					<Note
+						key={uuid()}
+						index={index}
+						title={note.title}
+						content={note.content}
+					/>
+				);
+			})}
 			<Footer />
 		</div>
 	);
