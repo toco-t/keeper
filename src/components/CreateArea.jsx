@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-function CreateArea() {
-	const [notes, setNotes] = useState({
+function CreateArea(props) {
+	const [todo, setTodo] = useState({
 		title: "",
 		content: "",
 	});
 
 	function reflectChanges(event) {
 		const { value, name } = event.target;
-		setNotes((prevValues) => {
+		setTodo((prevValues) => {
 			return {
 				...prevValues,
 				[name]: value,
@@ -23,7 +23,7 @@ function CreateArea() {
 					onChange={reflectChanges}
 					name="title"
 					placeholder="Title"
-					value={notes.title}
+					value={todo.title}
 				/>
 				<textarea
 					onChange={reflectChanges}
@@ -31,7 +31,16 @@ function CreateArea() {
 					placeholder="Take a note..."
 					rows="3"
 				/>
-				<button onClick={() => {}}>Add</button>
+				<button
+					onClick={() => {
+						props.addTask(todo);
+						setTodo({ title: "", content: "" });
+						document.querySelector("textarea").value = "";
+					}}
+					type="button"
+				>
+					Add
+				</button>
 			</form>
 		</div>
 	);

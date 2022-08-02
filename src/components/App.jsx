@@ -5,10 +5,19 @@ import Note from "./Note";
 import Footer from "./Footer";
 
 function App() {
+	const [notes, setNotes] = useState([]);
+
+	function addTask(note) {
+		setNotes((prevNotes) => {
+			prevNotes.push(note);
+		});
+		console.log(note, notes);
+	}
+
 	return (
 		<div>
 			<Header />
-			<CreateArea />
+			<CreateArea addTask={addTask} />
 			<Note key={1} title="Note title" content="Note content" />
 			<Footer />
 		</div>
