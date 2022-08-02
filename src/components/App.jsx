@@ -8,16 +8,24 @@ import { v4 as uuid } from "uuid";
 function App() {
 	const [notes, setNotes] = useState([]);
 
-	function addTask(note) {
+	function addNote(note) {
 		setNotes((prevNotes) => {
 			return [...prevNotes, note];
+		});
+	}
+
+	function removeNote(note) {
+		setNotes(() => {
+			return notes.filter((task, index) => {
+				return index !== note;
+			});
 		});
 	}
 
 	return (
 		<div>
 			<Header />
-			<CreateArea add={addTask} />
+			<CreateArea add={addNote} />
 			{notes.map((note, index) => {
 				return (
 					<Note
@@ -25,6 +33,7 @@ function App() {
 						index={index}
 						title={note.title}
 						content={note.content}
+						remove={removeNote}
 					/>
 				);
 			})}
